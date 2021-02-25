@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our clients</title>
+</head>
+<body>
+    <div class="cover">
+    <img src="{{url_for('static', filename='coverpic.png')}}" width="100%" height="400" alt="gift boxes">
+    </div>
+    <div class="client-data">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>AGE</th>
+                <th>EMAIL ID</th>
+                <th>GENDER</th>
+                <th>PHONE NUMBER</th>
+                <th>OPERATION</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td>{{customer.id}}</td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.age}}</td>
+                <td>{{customer.email}}</td>
+                <td>{{customer.gender}}</td>
+                <td>{{customer.phone}}</td>
+                <td>   
+                    <form method="POST" action="./updateclient">
+                        <input type="hidden" value="{{customer.name}}" name="oldName">
+                        <input type="text" value="{{customer.name}}" name="newName">
+                        <input type="hidden" value="{{customer.age}}" name="oldAge">
+                        <input type="text" value="{{customer.age}}" name="newAge">
+                        <input type="hidden" value="{{customer.email}}" name="oldEmail">
+                        <input type="text" value="{{customer.email}}" name="newEmail">
+                        <input type="hidden" value="{{customer.gender}}" name="oldGender">
+                        <input type="text" value="{{customer.gender}}" name="newGender">
+                        <input type="hidden" value="{{customer.phone}}" name="oldPhone">
+                        <input type="text" value="{{customer.phone}}" name="newPhone">
+                        <input type="submit" value="Update">
+                    </form>
+                    <form method="POST" action="./deleteclient">
+                        <input type="hidden" value="{{customer.name}}" name="name">
+                        <input type="submit" value="Delete">
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+</body>
+</html>

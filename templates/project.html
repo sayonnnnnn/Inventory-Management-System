@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Recommendation System</title>
+</head>
+<body>
+    <div class="cover">
+        <img src="{{url_for('static', filename='coverpic.png')}}" width="100%" height="400" alt="gift boxes">
+    </div>
+    <div class="intro-project">
+        <h2>Hi, {{customers[-1].name}} please choose from our vast collection of gift items for your loved ones!</h2> 
+    </div>
+    <form action="./project" target="result2" method='POST'>
+        <select name="gift" multiple>
+        {% for gift in gifts %}
+        <option value ="{{gift}}">{{gift.name}} {{gift.price}}</option>
+        {% endfor %}
+        </select> 
+    </form>
+    <div class="gifts-recommended">
+        <h2>RECOMMENDED GIFTS </h2>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>NAME</th>
+                <th>PRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rec in recommended %}
+            <tr>
+                <td>{{rec.name}}</td>
+                <td>{{rec.price}}</td>
+            </tr>
+            {%  endfor %}
+        </tbody>
+    </table>
+    <!--
+    <br>
+    <div class="gifts-selected">
+        <h2>YOU HAVE SELECTED THE FOLLOWING GIFTS</h2>
+        <table>
+            <thead>                
+                <tr>
+                    <th>NAME</th>
+                </tr>
+            </thead>
+            <tbody>                
+                {% for selected_gift in selected_gifts %}
+                <tr>
+                    <td>{{selected_gift}}</td>
+
+                </tr>                
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+     --> 
+</body>
+</html>
