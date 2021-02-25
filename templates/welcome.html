@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Recommendation System</title>
+</head>
+<body>
+    <div class="cover">
+        <img src="{{url_for('static', filename='coverpic.png')}}" width="100%" height="400" alt="gift boxes">
+    </div>
+    <div class="strip"><h2>Please give us this opportunity to know more about you</h2></div>
+    <br>
+    <form method="POST" action="./insert">
+        <input type="text" name="name" placeholder="What's your name?">
+        <input type="number" name="age" placeholder="How old are you?">
+        <!-- email, address, gender, phone-->
+        <input type="text" name="email" placeholder="Let us know your email ID">
+        <input type="text" name="gender" placeholder="What do you identify as?">
+        <input type="text" name="phone" placeholder="Can we have your number?">
+        <input type="submit" value="Submit">
+    </form>
+    <br>
+    <h3>
+        <a href = "{{ url_for('rdbms') }}">CLICK HERE TO VISIT OUR GIFT RECOMMENDATION SYSTEM</a>
+    </h3>
+    <h3>
+        <a href = "{{ url_for('clients') }}">CLICK HERE TO SEE OUR CLIENTS</a>
+    </h3>
+</body>
+</html>
