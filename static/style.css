@@ -1,0 +1,19 @@
+.intro-project{
+    background-color: chartreuse;
+    text-align: center;
+}
+
+.gifts-recommended{
+    background-color: crimson;
+    text-align: center;
+}
+
+img{
+    width: 100%;
+}
+
+table{
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 auto;
+}
