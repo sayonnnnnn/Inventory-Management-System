@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gift Recommendation System</title>
 </head>
-<body>
+<body style="background-color: tomato;">
     <div class="cover">
         <img src="{{url_for('static', filename='coverpic.png')}}" width="100%" height="400" alt="gift boxes">
     </div>
-    <div class="strip"><h2>Please give us this opportunity to know more about you</h2></div>
+    <div class="strip" style="background-color: yellow;">
+        <h2>Please give us this opportunity to know more about you</h2>
+    </div>
     <br>
     <form method="POST" action="./insert">
         <input type="text" name="name" placeholder="What's your name?">
@@ -23,10 +26,16 @@
     </form>
     <br>
     <h3>
-        <a href = "{{ url_for('rdbms') }}">CLICK HERE TO VISIT OUR GIFT RECOMMENDATION SYSTEM</a>
+        To see our Gift Recommendation System
+        <span>
+        <a href = "{{ url_for('rdbms') }}">CLICK HERE</a>
+        </span>
     </h3>
     <h3>
-        <a href = "{{ url_for('clients') }}">CLICK HERE TO SEE OUR CLIENTS</a>
+        To see our clients 
+        <span>
+        <a href = "{{ url_for('clients') }}">CLICK HERE</a>
+        </span>
     </h3>
 </body>
 </html>
