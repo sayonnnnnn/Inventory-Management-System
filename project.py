@@ -2,6 +2,7 @@ import os
 import sqlite3
 from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask_bootstrap import Bootstrap
 
 project_dir = os.path.dirname(os.path.abspath(__file__))
 database_file = "sqlite:///{}".format(os.path.join(project_dir, "project.db")) 
@@ -15,6 +16,7 @@ app.config['SECRET_KEY'] = 'sjciuse3hfens8lns'
 app.config['SQLALCHEMY_DATABASE_URI'] = database_file
 
 db = SQLAlchemy(app)
+Bootstrap(app)
 
 # ---------------------  DATABASE TABLES IN THE FORM OF FLASK MODELS --------------------------------
 class Gifts(db.Model):

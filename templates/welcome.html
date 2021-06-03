@@ -22,20 +22,25 @@
     <br>
     <div class="welcome-form">
     <form method="POST" action="./insert">
-        <label for="name">NAME</label>
+        <label for="name">NAME
         <input type="text" name="name" placeholder="What's your name?">
+        </label>
         <br>
-        <label for="age">Age</label>
+        <label for="age">Age
         <input type="number" name="age" placeholder="How old are you?">
+        </label>
         <br>
-        <label for="inputEmail4">Email</label>
+        <label for="inputEmail4">Email
         <input type="text" name="email" placeholder="Let us know your email ID">
+        </label>
         <br>
-        <label for="gender">Sex</label>
+        <label for="gender">Sex
         <input type="text" name="gender" placeholder="What do you identify as?">
+        </label>
         <br>
-        <label for="phone">Phone Number</label>
+        <label for="phone">Phone Number
         <input type="text" name="phone" placeholder="Can we have your number?">
+        </label>
         <input type="submit" value="Submit">
     </form>
     </div>
@@ -47,7 +52,7 @@
         </span>
     </h3>
     <h3>
-        To see our clients 
+        To see our customers
         <span>
         <a href = "{{ url_for('clients') }}">CLICK HERE</a>
         </span>

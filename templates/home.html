@@ -1,29 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">          
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
-    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
-    <title>Gift Recommendation System</title>
-</head>
-<body>
-    <div class="Sign-in-or-not" style="text-align: center; align-items: center;">
-        <h2>Are you a client?
-            <span>
-                <a href="{{ url_for('welcome') }}">Login</a>
-            </span>
-        </h2>
-        <br>
-        <h2>Are you an employee?
-            <span>
-                <a href="{{  url_for('welcome') }}">Skip</a>
-            </span>
-        </h2>
-    </div>
-</body>
-</html>
+{% extends "bootstrap/base.html" %}
+{% block title %} 
+Welcome
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4 text-center"> Welcome to Gift Recommendation System</h1>
+    <h2 class="lead text-center">Relational Database Management System CC2202 Project</h2>
+    <hr class="my-4">
+    <br>
+    <br>
+    <p class="text-center">Made by Khushi Sanjeev Kumar Agrawal & Sayon Sai Dutta.</p>
+    <h1 class="text-center"><a class="btn btn-danger btn-lg" href="{{ url_for('welcome') }}" role="button">Get Started</a></h1>
+</div>
+<style>
+    body{
+        background-color: lightgreen;
+    }
+    .jumbotron{
+        background-color: lightgreen;
+    }
+    .my-4{
+        background-color: tomato;
+    }
+</style>
+
+{% endblock %}
+
