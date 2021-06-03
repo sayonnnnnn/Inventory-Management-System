@@ -1,13 +1,12 @@
 import os
 import sqlite3
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 
-
 project_dir = os.path.dirname(os.path.abspath(__file__))
-database_file = "sqlite:///{}".format(os.path.join(project_dir, "project.db"))
+database_file = "sqlite:///{}".format(os.path.join(project_dir, "project.db")) 
 
-con = sqlite3.connect('C:/Users/lenovo/Documents/RDBMS/project.db', check_same_thread=False)
+con = sqlite3.connect('C:/Users/lenovo/Documents/RDBMS-FINAL/RDBMS_PROJECT/project.db', check_same_thread=False)
 con.row_factory = sqlite3.Row
 cur = con.cursor()
 
@@ -17,25 +16,36 @@ app.config['SQLALCHEMY_DATABASE_URI'] = database_file
 
 db = SQLAlchemy(app)
 
+# ---------------------  DATABASE TABLES IN THE FORM OF FLASK MODELS --------------------------------
+class Gifts(db.Model):
+    __tablename__ = 'gifts'
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), nullable=False)
+    price = db.Column(db.Float, nullable=False)
+
 class Customer(db.Model):
+    __tablename__ = 'customer'
     name = db.Column(db.String(30), nullable=False)
     age = db.Column(db.Integer, nullable=False)
     email = db.Column(db.String(30), primary_key=True)
     gender = db.Column(db.String(20), nullable=False)
-    phone = db.Column(db.String(13), nullable=False)
-
-class Gifts(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
-    price = db.Column(db.Float, nullable=False)
+    phone = db.Column(db.String(13), nullable=False, unique=True)
 
 class Recommended(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
+    __tablename__ = 'recommended'
+    # id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(30), primary_key=True)
     price = db.Column(db.Float, nullable=False)
 
-# COLLECTING CUSTOMER DATA
+# ----------------------------------------------------------------------------------------------
+# ---------------------------------- ROUTING ---------------------------------------------------
+
 @app.route("/")
+def home():
+    return render_template("home.html")
+
+# COLLECTING CUSTOMER DATA
+@app.route("/welcome", methods=['GET','POST'])
 def welcome():
     cust = Customer.query.all()
     return render_template("welcome.html", customers = cust)
@@ -45,7 +55,7 @@ def insert():
     customer = Customer(name=request.form['name'], age=request.form['age'], email=request.form['email'], gender=request.form['gender'], phone=request.form['phone'])
     db.session.add(customer)
     db.session.commit()
-    return redirect("/")
+    return redirect("/welcome")
 
 @app.route("/clients", methods=['GET', 'POST'])
 def clients():
@@ -60,18 +70,14 @@ def rdbms():
     if c[-1].age < 18:
         recommended_gifts_for_below18 = Gifts.query.filter(Gifts.id<20).all()
         for i in recommended_gifts_for_below18:
-            cur.execute("INSERT INTO Recommended(name,price) VALUES(?,?)",(i.name.i.price))
-        #recommended = recommended_gifts_for_below18
-        #for i in range(0,2):
-         #   db.session.add(Recommended('recommended[i].name', 'recommended[i].price')) # new line -1
-          #  db.session.commit() # new line-2
+            cur.execute('INSERT INTO recommended(name,price) VALUES(?,?)',(i.name, i.price))
             con.commit()
     #    r = Recommended.query.all()
     #    return render_template("project.html", gifts = g, customers = c, recommended = r) 
     else:
         recommended_gifts_for_above18 = Gifts.query.filter(Gifts.id>=20).all()
         for i in recommended_gifts_for_above18:
-            cur.execute("INSERT INTO Recommended(name,price) VALUES(?,?)", (i.name, i.price))
+            cur.execute('INSERT INTO recommended(name,price) VALUES(?,?)',(i.name, i.price))
             con.commit()
     r = Recommended.query.all()
     return render_template("project.html", gifts = g, customers = c, recommended = r) 
@@ -91,11 +97,12 @@ def update():
 
 @app.route("/deleteclient", methods=['POST'])
 def delete():
-    name = request.form.get("name")
-    c = Customer.query.filter_by(name=name).first()
+    email = request.form.get("email")
+    c = Customer.query.filter_by(email=email).first()
     db.session.delete(c)
     db.session.commit()
     return redirect("/project")
 
+# -------------------------------------------------------------------------------------------------------
 if __name__ == '__main__':
-    app.run(debug=True, port=3000, host="0.0.0.0")
+    app.run(debug=True, host='0.0.0.0', port=3000)

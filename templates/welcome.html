@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">          
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png"> -->
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
     <title>Gift Recommendation System</title>
 </head>
 <body style="background-color: tomato;">
@@ -15,15 +20,25 @@
         <h2>Please give us this opportunity to know more about you</h2>
     </div>
     <br>
+    <div class="welcome-form">
     <form method="POST" action="./insert">
+        <label for="name">NAME</label>
         <input type="text" name="name" placeholder="What's your name?">
+        <br>
+        <label for="age">Age</label>
         <input type="number" name="age" placeholder="How old are you?">
-        <!-- email, address, gender, phone-->
+        <br>
+        <label for="inputEmail4">Email</label>
         <input type="text" name="email" placeholder="Let us know your email ID">
+        <br>
+        <label for="gender">Sex</label>
         <input type="text" name="gender" placeholder="What do you identify as?">
+        <br>
+        <label for="phone">Phone Number</label>
         <input type="text" name="phone" placeholder="Can we have your number?">
         <input type="submit" value="Submit">
     </form>
+    </div>
     <br>
     <h3>
         To see our Gift Recommendation System
